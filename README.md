@@ -137,6 +137,26 @@ The rotations of 3D joints are represented using 3D exponential maps, and the ro
 ## Motion Retargeting
 Motion retargeting can be done using [GMR](https://github.com/YanjieZe/GMR). A script to convert GMR files to the MimicKit format is available in [`tools/gmr_to_mimickit/`](tools/gmr_to_mimickit/).
 
+如果是想要通过[GVHMR](https://github.com/zju3dv/GVHMR?tab=readme-ov-file), 则需要先按照GVHMR中的Installation下载安装好后，输入视频，输出human motion recovery的.pt文件.
+然后再通过GMR重定向到指定的机器人型号(e.g. unitree_g1), 得到.pkl序列文件. 最后将.pkl序列文件放在MimicKit中进行Imitation learning的训练.
+
+### Example
+```
+# GVHMR repo 下载好之后重定向打网球的视频
+python tools/demo/demo.py --video=docs/example_video/tennis.mp4 -s
+
+# 注意！！！
+# 因为 GVHMR 和 GMR 使用的 numpy 版本较高， 而MimicKit使用的版本较低， 所以必须把GMR中的numpy版本降为 1.24.4之后再Retargeting
+conda install numpy=1.24.4
+
+# MimicKit 转换文件格式， 详情参考(https://github.com/xbpeng/MimicKit/pull/12/changes/13d87a88772ebb5fdbb2bb5df2abc86aba653e1e#top)
+python tools/data_format_conversion/gmr_to_mimickit.py --input_file {input_file_path} --output_file {output_file_path}
+
+# MimicKit AMP
+
+
+```
+
 A script to convert SMPL motion files from [AMASS](https://amass.is.tue.mpg.de/) to the MimicKit format is available in [`tools/smpl_to_mimickit/`](tools/smpl_to_mimickit/).
 
 ---
