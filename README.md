@@ -163,10 +163,10 @@ python tools/demo/demo.py --video=docs/example_video/tennis.mp4 -s
 # 注意！！！
 # 因为 GVHMR 和 GMR 使用的 numpy 版本较高， 而MimicKit使用的版本较低， 所以必须把GMR中的numpy版本降为 1.24.4之后再Retargeting
 conda install numpy=1.24.4
-python scripts/gvhmr_to_robot.py --gvhmr_pred_file <path_to_hmr4d_results.pt> --robot unitree_g1 --record_video
+python scripts/gvhmr_to_robot.py --gvhmr_pred_file ~/hmr4d_results.pt --robot unitree_g1 --save_path ../g1_tennis.pkl
 
 # MimicKit 转换文件格式， 详情参考(https://github.com/xbpeng/MimicKit/pull/12/changes/13d87a88772ebb5fdbb2bb5df2abc86aba653e1e#top)
-python tools/data_format_conversion/gmr_to_mimickit.py --input_file {input_file_path} --output_file {output_file_path}
+python tools/gmr_to_mimickit/gmr_to_mimickit.py --input_file ../g1_tennis.pkl --output_file ./g1_tennis.pkl
 
 # MimicKit AMP
 python mimickit/run.py --mode train --num_envs 4096 --engine_config data/engines/isaac_gym_engine.yaml --env_config data/envs/deepmimic_humanoid_env.yaml --agent_config data/agents/deepmimic_humanoid_ppo_agent.yaml --visualize true --out_dir output/
