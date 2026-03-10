@@ -141,7 +141,7 @@ Motion retargeting can be done using [GMR](https://github.com/YanjieZe/GMR). A s
 然后再通过GMR重定向到指定的机器人型号(e.g. unitree_g1), 得到.pkl序列文件. 最后将.pkl序列文件放在MimicKit中进行Imitation learning的训练.
 
 ### Example
-```
+```shell
 # GVHMR repo 下载好之后重定向打网球的视频
 python tools/demo/demo.py --video=docs/example_video/tennis.mp4 -s
 
@@ -153,7 +153,7 @@ conda install numpy=1.24.4
 python tools/data_format_conversion/gmr_to_mimickit.py --input_file {input_file_path} --output_file {output_file_path}
 
 # MimicKit AMP
-
+python mimickit/run.py --mode train --num_envs 4096 --engine_config data/engines/isaac_gym_engine.yaml --env_config data/envs/deepmimic_humanoid_env.yaml --agent_config data/agents/deepmimic_humanoid_ppo_agent.yaml --visualize true --out_dir output/
 
 ```
 
