@@ -139,6 +139,21 @@ Motion retargeting can be done using [GMR](https://github.com/YanjieZe/GMR). A s
 
 如果是想要通过[GVHMR](https://github.com/zju3dv/GVHMR?tab=readme-ov-file), 则需要先按照GVHMR中的Installation下载安装好后，输入视频，输出human motion recovery的.pt文件.
 然后再通过GMR重定向到指定的机器人型号(e.g. unitree_g1), 得到.pkl序列文件. 最后将.pkl序列文件放在MimicKit中进行Imitation learning的训练.
+```
+视频
+ ↓
+GVHMR                           视频 → 人体
+ ↓
+SMPL human motion
+ ↓
+GMR                             人体 → 机器人
+ ↓
+Robot motion (Unitree G1)
+ ↓
+MimicKit
+ ↓
+RL imitation / 控制策略
+```
 
 ### Example
 ```shell
